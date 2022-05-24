@@ -69,7 +69,7 @@ def api():
         for service in messageRequest['Services']:
             # Select a random microservice endpoint, from global ROUTES, updated from DynamoDB
             service_endpoint = ""
-             try:
+            try:
                 service_endpoint = random.choice(ROUTES[service])
                 json_log('RequestId {} needs Service:{} using Endpoint:{}'.format(messageRequest['RequestId'],service,service_endpoint))
                 req = requests.post(service_endpoint, timeout=10, json={'RequestId':messageRequest['RequestId'],'Message':messageRequest['Message']}).json()
